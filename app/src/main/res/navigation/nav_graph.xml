@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/choseCountryFragment">
+
+    <fragment
+        android:id="@+id/matchesFragment"
+        android:name="com.example.sportapplication.ui.fragment.MatchesFragment"
+        android:label="MatchesFragment" >
+        <argument
+            android:name="league id"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
+    <fragment
+        android:id="@+id/choseCountryFragment"
+        android:name="com.example.sportapplication.ui.fragment.ChoseCountryFragment"
+        android:label="ChoseCountryFragment" >
+        <action
+            android:id="@+id/action_choseCountryFragment_to_choseLeagueFragment"
+            app:destination="@id/choseLeagueFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/choseLeagueFragment"
+        android:name="com.example.sportapplication.ui.fragment.ChoseLeagueFragment"
+        android:label="ChoseLeagueFragment" >
+        <action
+            android:id="@+id/action_choseLeagueFragment_to_matchesFragment"
+            app:destination="@id/matchesFragment" />
+        <argument
+            android:name="country_id"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
+</navigation>
