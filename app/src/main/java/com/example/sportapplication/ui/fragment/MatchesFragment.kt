@@ -63,6 +63,10 @@ class MatchesFragment: BaseFragment<FragmentMatchesBinding>(FragmentMatchesBindi
             toolbar.setNavigationOnClickListener {
                 view?.findNavController()?.popBackStack()
             }
+
+            toWebButton.setOnClickListener {
+                view?.findNavController()?.navigate(R.id.action_matchesFragment_to_webFragment)
+            }
         }
     }
 

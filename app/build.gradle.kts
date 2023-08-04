@@ -72,4 +72,9 @@ dependencies {
     implementation("androidx.navigation:navigation-ui-ktx:$fragmentNavigationVersion")
 
     implementation("io.coil-kt:coil:2.2.2")
+
+    implementation("com.onesignal:OneSignal:[4.0.0, 4.99.99]")
+
+    implementation(platform("com.google.firebase:firebase-bom:32.2.0"))
+    implementation("com.google.firebase:firebase-analytics-ktx")
 }
