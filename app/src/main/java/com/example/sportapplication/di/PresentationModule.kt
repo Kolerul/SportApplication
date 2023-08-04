@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.example.sportapplication.presentation.viewmodel.CountryViewModel
 import com.example.sportapplication.presentation.viewmodel.LeagueViewModel
 import com.example.sportapplication.presentation.viewmodel.MatchesViewModel
+import com.example.sportapplication.presentation.viewmodel.WebViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -25,4 +26,9 @@ interface PresentationModule {
     @IntoMap
     @ViewModelKey(LeagueViewModel::class)
     fun provideLeagueViewModel(viewModel: LeagueViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(WebViewModel::class)
+    fun provideWebViewModel(viewModel: WebViewModel): ViewModel
 }
