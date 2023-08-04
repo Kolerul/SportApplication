@@ -21,9 +21,11 @@ class MatchViewHolder(private val binding: MatchItemBinding): RecyclerView.ViewH
             date.text = match.matchDate
             time.text = match.matchTime
             homeTeamImage.load(match.teamHomeBadgeUri){
+                placeholder(R.drawable.loading_animation)
                 error(R.drawable.ic_no_image)
             }
             awayTeamImage.load(match.teamAwayBadgeUri){
+                placeholder(R.drawable.loading_animation)
                 error(R.drawable.ic_no_image)
             }
         }

@@ -23,6 +23,7 @@ class ChoseLeagueFragment: BaseFragment<FragmentChoseLeagueBinding>(FragmentChos
         super.onViewCreated(view, savedInstanceState)
 
         setUiStateObserver()
+        setOnClickListeners()
     }
 
     private fun setUiStateObserver(){
@@ -34,9 +35,11 @@ class ChoseLeagueFragment: BaseFragment<FragmentChoseLeagueBinding>(FragmentChos
                 is LeagueUIState.Loading -> {
                     setLoading()
                 }
+
                 is LeagueUIState.Content -> {
                     setContent(state.leagues)
                 }
+
                 is LeagueUIState.Error -> {
                     setError(state.errorId)
                 }
@@ -44,23 +47,48 @@ class ChoseLeagueFragment: BaseFragment<FragmentChoseLeagueBinding>(FragmentChos
         }
     }
 
-    private fun setInitializing(){
-        val countryId = arguments?.getInt(COUNTRY_ID_KEY) ?: 0
+    private fun setOnClickListeners() {
+        binding.apply {
+            toolbar.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.refresh_button -> {
+                        val countryId = getCountryId()
+                        viewModel.getLeagues(countryId)
+                        true
+                    }
+
+                    else -> false
+                }
+            }
+
+            toolbar.setNavigationOnClickListener {
+                view?.findNavController()?.popBackStack()
+            }
+        }
+    }
+
+    private fun getCountryId(): Int = arguments?.getInt(COUNTRY_ID_KEY) ?: 0
+
+    private fun setInitializing() {
+        val countryId = getCountryId()
         viewModel.getLeagues(countryId)
     }
 
-    private fun setLoading(){
+    private fun setLoading() {
         binding.apply {
-            text.text = "Loading"
-            text.visibility = View.VISIBLE
+            text.visibility = View.GONE
+            loadingProgressBar.visibility = View.VISIBLE
             contentLayout.visibility = View.GONE
+            toolbar.menu.findItem(R.id.refresh_button).isEnabled = false
         }
     }
 
     private fun setContent(leagues: List<League>){
         binding.apply {
             text.visibility = View.GONE
+            loadingProgressBar.visibility = View.GONE
             contentLayout.visibility = View.VISIBLE
+            toolbar.menu.findItem(R.id.refresh_button).isEnabled = true
 
             val adapter = LeagueAdapter{ league ->
                 val leagueId = league.leagueId
@@ -72,10 +100,12 @@ class ChoseLeagueFragment: BaseFragment<FragmentChoseLeagueBinding>(FragmentChos
         }
     }
 
-    private fun setError(errorId: String){
+    private fun setError(errorId: Int) {
         binding.apply {
-            text.text = errorId
+            text.text = requireContext().getString(errorId)
+            toolbar.menu.findItem(R.id.refresh_button).isEnabled = true
             text.visibility = View.VISIBLE
+            loadingProgressBar.visibility = View.GONE
             contentLayout.visibility = View.GONE
         }
     }

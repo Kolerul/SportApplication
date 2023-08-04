@@ -11,6 +11,7 @@ class CountryViewHolder(private val binding: SimpleItemBinding): RecyclerView.Vi
     fun onBind(country: Country){
         binding.apply {
             badgeImage.load(country.countryLogoUri){
+                placeholder(R.drawable.loading_animation)
                 error(R.drawable.ic_no_image)
             }
             name.text = country.countryName

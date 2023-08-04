@@ -4,9 +4,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.sportapplication.R
 import com.example.sportapplication.domain.repository.LeagueRepository
 import com.example.sportapplication.presentation.uistate.LeagueUIState
 import kotlinx.coroutines.launch
+import java.net.SocketTimeoutException
+import java.net.UnknownHostException
 import javax.inject.Inject
 
 class LeagueViewModel @Inject constructor(
@@ -25,8 +28,12 @@ class LeagueViewModel @Inject constructor(
                     leagueId
                 )
                 _uiState.value = LeagueUIState.Content(result)
-            }catch (e: Exception){
-                _uiState.value = LeagueUIState.Error(e.message.toString())
+            } catch (e: UnknownHostException) {
+                _uiState.value = LeagueUIState.Error(R.string.internet_connection_error)
+            } catch (e: SocketTimeoutException) {
+                _uiState.value = LeagueUIState.Error(R.string.connection_time_error)
+            } catch (e: Exception) {
+                _uiState.value = LeagueUIState.Error(R.string.unknown_error)
             }
         }
     }

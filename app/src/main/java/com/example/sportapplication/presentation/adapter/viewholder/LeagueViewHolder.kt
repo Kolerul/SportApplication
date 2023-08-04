@@ -11,6 +11,7 @@ class LeagueViewHolder(private val binding: SimpleItemBinding): RecyclerView.Vie
     fun onBind(league: League){
         binding.apply {
             badgeImage.load(league.leagueLogoUri){
+                placeholder(R.drawable.loading_animation)
                 error(R.drawable.ic_no_image)
             }
             name.text = league.leagueName

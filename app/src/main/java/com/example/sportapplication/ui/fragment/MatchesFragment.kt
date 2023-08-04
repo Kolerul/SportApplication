@@ -3,6 +3,8 @@ package com.example.sportapplication.ui.fragment
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
+import com.example.sportapplication.R
 import com.example.sportapplication.SportApplication
 import com.example.sportapplication.databinding.FragmentMatchesBinding
 import com.example.sportapplication.domain.entity.Match
@@ -20,6 +22,7 @@ class MatchesFragment: BaseFragment<FragmentMatchesBinding>(FragmentMatchesBindi
         super.onViewCreated(view, savedInstanceState)
 
         setUiStateObserver()
+        setOnClickListeners()
     }
 
     private fun setUiStateObserver(){
@@ -31,9 +34,11 @@ class MatchesFragment: BaseFragment<FragmentMatchesBinding>(FragmentMatchesBindi
                 is MatchesUIState.Loading -> {
                     setLoading()
                 }
+
                 is MatchesUIState.Content -> {
                     setContent(state.matches)
                 }
+
                 is MatchesUIState.Error -> {
                     setError(state.errorId)
                 }
@@ -41,24 +46,48 @@ class MatchesFragment: BaseFragment<FragmentMatchesBinding>(FragmentMatchesBindi
         }
     }
 
-    private fun setInitializing(){
-        val leaguesId = arguments?.getInt(LEAGUE_ID_KEY) ?: 0
+    private fun setOnClickListeners() {
+        binding.apply {
+            toolbar.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.refresh_button -> {
+                        val leagueId = getLeagueId()
+                        viewModel.getMatches(leagueId)
+                        true
+                    }
+
+                    else -> false
+                }
+            }
+
+            toolbar.setNavigationOnClickListener {
+                view?.findNavController()?.popBackStack()
+            }
+        }
+    }
+
+    private fun getLeagueId(): Int = arguments?.getInt(LEAGUE_ID_KEY) ?: 0
+
+    private fun setInitializing() {
+        val leaguesId = getLeagueId()
         viewModel.getMatches(leaguesId)
     }
 
-    private fun setLoading(){
+    private fun setLoading() {
         binding.apply {
             matchesRecyclerView.visibility = View.GONE
-            loading.visibility = View.VISIBLE
+            loadingProgressBar.visibility = View.VISIBLE
             error.visibility = View.GONE
+            toolbar.menu.findItem(R.id.refresh_button).isEnabled = false
         }
     }
 
     private fun setContent(matches: List<Match>){
         binding.apply {
             matchesRecyclerView.visibility = View.VISIBLE
-            loading.visibility = View.GONE
+            loadingProgressBar.visibility = View.GONE
             error.visibility = View.GONE
+            toolbar.menu.findItem(R.id.refresh_button).isEnabled = true
 
             val adapter = MatchesAdapter()
             matchesRecyclerView.adapter = adapter
@@ -66,12 +95,13 @@ class MatchesFragment: BaseFragment<FragmentMatchesBinding>(FragmentMatchesBindi
         }
     }
 
-    private fun setError(errorId: String){
+    private fun setError(errorId: Int) {
         binding.apply {
             matchesRecyclerView.visibility = View.GONE
-            loading.visibility = View.GONE
+            loadingProgressBar.visibility = View.GONE
             error.visibility = View.VISIBLE
-            error.text = errorId
+            toolbar.menu.findItem(R.id.refresh_button).isEnabled = true
+            error.text = requireContext().getString(errorId)
         }
     }
 

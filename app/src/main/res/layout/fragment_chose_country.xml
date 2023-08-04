@@ -6,13 +6,29 @@
     android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        app:title="@string/app_name"
+        app:menu="@menu/refresh_menu"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:padding="6dp" />
+
+    <ProgressBar
+        android:visibility="gone"
+        android:layout_gravity="center"
+        android:id="@+id/loading_progress_bar"
+        android:layout_width="wrap_content"
+        android:indeterminateDrawable="@drawable/loading_image"
+        android:layout_height="match_parent" />
+
     <TextView
         android:id="@+id/text"
         tools:text="WELCOME!"
         android:visibility="gone"
         android:gravity="center"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
     <LinearLayout
         android:id="@+id/content_layout"
@@ -25,14 +41,17 @@
             android:text="@string/select_country"
             android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="50dp"/>
+            android:layout_height="50dp" />
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/countries_recycler_view"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
+
+
     </LinearLayout>
 
 </LinearLayout>

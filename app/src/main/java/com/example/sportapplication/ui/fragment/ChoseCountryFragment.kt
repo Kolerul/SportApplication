@@ -23,6 +23,7 @@ class ChoseCountryFragment: BaseFragment<FragmentChoseCountryBinding>(FragmentCh
         super.onViewCreated(view, savedInstanceState)
 
         setUiStateObserver()
+        setOnClickListeners()
     }
 
     private fun setUiStateObserver(){
@@ -34,9 +35,11 @@ class ChoseCountryFragment: BaseFragment<FragmentChoseCountryBinding>(FragmentCh
                 is CountryUIState.Loading -> {
                     setLoading()
                 }
+
                 is CountryUIState.Content -> {
                     setContent(state.countries)
                 }
+
                 is CountryUIState.Error -> {
                     setError(state.errorId)
                 }
@@ -44,20 +47,35 @@ class ChoseCountryFragment: BaseFragment<FragmentChoseCountryBinding>(FragmentCh
         }
     }
 
-    private fun setInitializing(){
+    private fun setOnClickListeners() {
+        binding.apply {
+            toolbar.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.refresh_button -> {
+                        viewModel.getCountries()
+                        true
+                    }
+
+                    else -> false
+                }
+            }
+        }
+    }
+
+    private fun setInitializing() {
         viewModel.getCountries()
         binding.apply {
-            text.text = "WELCOME!"
             text.visibility = View.VISIBLE
             contentLayout.visibility = View.GONE
         }
     }
 
-    private fun setLoading(){
+    private fun setLoading() {
         binding.apply {
-            text.text = "Loading"
             text.visibility = View.VISIBLE
             contentLayout.visibility = View.GONE
+            loadingProgressBar.visibility = View.VISIBLE
+            toolbar.menu.findItem(R.id.refresh_button).isEnabled = false
         }
     }
 
@@ -65,22 +83,27 @@ class ChoseCountryFragment: BaseFragment<FragmentChoseCountryBinding>(FragmentCh
         binding.apply {
             text.visibility = View.GONE
             contentLayout.visibility = View.VISIBLE
+            loadingProgressBar.visibility = View.GONE
+            toolbar.menu.findItem(R.id.refresh_button).isEnabled = true
 
             val adapter = CountryAdapter { country ->
                 val id = country.countryId
                 val bundle = bundleOf(ChoseLeagueFragment.COUNTRY_ID_KEY to id)
-                view?.findNavController()?.navigate(R.id.action_choseCountryFragment_to_choseLeagueFragment, bundle)
+                view?.findNavController()
+                    ?.navigate(R.id.action_choseCountryFragment_to_choseLeagueFragment, bundle)
             }
             countriesRecyclerView.adapter = adapter
             adapter.submitList(countries)
         }
     }
 
-    private fun setError(errorId: String){
+    private fun setError(errorId: Int) {
         binding.apply {
-            text.text = errorId
+            text.text = requireContext().getString(errorId)
             text.visibility = View.VISIBLE
             contentLayout.visibility = View.GONE
+            loadingProgressBar.visibility = View.GONE
+            toolbar.menu.findItem(R.id.refresh_button).isEnabled = true
         }
     }
 
