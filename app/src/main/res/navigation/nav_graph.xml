@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/choseCountryFragment">
+    app:startDestination="@id/greetingFragment">
 
     <fragment
         android:id="@+id/matchesFragment"
@@ -14,7 +14,11 @@
             android:defaultValue="0" />
         <action
             android:id="@+id/action_matchesFragment_to_webFragment"
-            app:destination="@id/webFragment" />
+            app:destination="@id/webFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/choseCountryFragment"
@@ -22,7 +26,11 @@
         android:label="ChoseCountryFragment" >
         <action
             android:id="@+id/action_choseCountryFragment_to_choseLeagueFragment"
-            app:destination="@id/choseLeagueFragment" />
+            app:destination="@id/choseLeagueFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/choseLeagueFragment"
@@ -30,7 +38,11 @@
         android:label="ChoseLeagueFragment">
         <action
             android:id="@+id/action_choseLeagueFragment_to_matchesFragment"
-            app:destination="@id/matchesFragment" />
+            app:destination="@id/matchesFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <argument
             android:name="country_id"
             app:argType="integer"
@@ -40,4 +52,23 @@
         android:id="@+id/webFragment"
         android:name="com.example.sportapplication.ui.fragment.WebFragment"
         android:label="WebFragment" />
+    <fragment
+        android:id="@+id/greetingFragment"
+        android:name="com.example.sportapplication.ui.fragment.GreetingFragment"
+        android:label="GreetingFragment">
+        <action
+            android:id="@+id/action_greetingFragment_to_webFragment"
+            app:destination="@id/webFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_greetingFragment_to_choseCountryFragment"
+            app:destination="@id/choseCountryFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
 </navigation>

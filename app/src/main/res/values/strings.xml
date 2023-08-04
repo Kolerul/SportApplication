@@ -9,4 +9,7 @@
     <string name="no_data_error">There were no matches scheduled in this league in this range</string>
     <string name="refresh">Refresh</string>
     <string name="to_news">To News</string>
+    <string name="welcome">Welcome!</string>
+    <string name="matches">Matches</string>
+    <string name="news">News</string>
 </resources>
