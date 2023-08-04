@@ -2,6 +2,7 @@ package com.example.sportapplication.ui.fragment
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.example.sportapplication.R
@@ -42,6 +43,8 @@ class MatchesFragment: BaseFragment<FragmentMatchesBinding>(FragmentMatchesBindi
                 is MatchesUIState.Error -> {
                     setError(state.errorId)
                 }
+
+                else -> {}
             }
         }
     }
@@ -62,10 +65,6 @@ class MatchesFragment: BaseFragment<FragmentMatchesBinding>(FragmentMatchesBindi
 
             toolbar.setNavigationOnClickListener {
                 view?.findNavController()?.popBackStack()
-            }
-
-            toWebButton.setOnClickListener {
-                view?.findNavController()?.navigate(R.id.action_matchesFragment_to_webFragment)
             }
         }
     }
@@ -93,7 +92,11 @@ class MatchesFragment: BaseFragment<FragmentMatchesBinding>(FragmentMatchesBindi
             error.visibility = View.GONE
             toolbar.menu.findItem(R.id.refresh_button).isEnabled = true
 
-            val adapter = MatchesAdapter()
+            val adapter = MatchesAdapter { teamId ->
+                val bundle = bundleOf(TeamFragment.TEAM_ID_KEY to teamId)
+                view?.findNavController()
+                    ?.navigate(R.id.action_matchesFragment_to_teamFragment, bundle)
+            }
             matchesRecyclerView.adapter = adapter
             adapter.submitList(matches)
         }

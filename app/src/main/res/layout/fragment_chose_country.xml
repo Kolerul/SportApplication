@@ -12,6 +12,7 @@
         app:menu="@menu/refresh_menu"
         android:layout_width="match_parent"
         android:layout_height="55dp"
+        app:navigationIcon="@drawable/ic_arrow_back"
         android:padding="6dp" />
 
     <ProgressBar
@@ -37,6 +38,8 @@
         android:layout_height="match_parent">
 
         <TextView
+            android:textSize="20sp"
+            android:textStyle="bold"
             android:id="@+id/help_text"
             android:text="@string/select_country"
             android:gravity="center"

@@ -43,6 +43,8 @@ class ChoseCountryFragment: BaseFragment<FragmentChoseCountryBinding>(FragmentCh
                 is CountryUIState.Error -> {
                     setError(state.errorId)
                 }
+
+                else -> {}
             }
         }
     }
@@ -58,6 +60,10 @@ class ChoseCountryFragment: BaseFragment<FragmentChoseCountryBinding>(FragmentCh
 
                     else -> false
                 }
+            }
+
+            toolbar.setNavigationOnClickListener {
+                view?.findNavController()?.popBackStack()
             }
         }
     }

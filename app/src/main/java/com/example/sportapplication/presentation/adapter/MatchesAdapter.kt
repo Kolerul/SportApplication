@@ -8,7 +8,8 @@ import com.example.sportapplication.databinding.MatchItemBinding
 import com.example.sportapplication.domain.entity.Match
 import com.example.sportapplication.presentation.adapter.viewholder.MatchViewHolder
 
-class MatchesAdapter: ListAdapter<Match, MatchViewHolder>(DiffCallback) {
+class MatchesAdapter(private val onImageClickListener: (Int) -> Unit) :
+    ListAdapter<Match, MatchViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MatchViewHolder =
         MatchViewHolder(
@@ -17,7 +18,7 @@ class MatchesAdapter: ListAdapter<Match, MatchViewHolder>(DiffCallback) {
 
     override fun onBindViewHolder(holder: MatchViewHolder, position: Int) {
         val current = getItem(position)
-        holder.onBind(current)
+        holder.onBind(current, onImageClickListener)
     }
 
     companion object DiffCallback: DiffUtil.ItemCallback<Match>(){

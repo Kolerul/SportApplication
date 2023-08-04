@@ -43,6 +43,8 @@ class ChoseLeagueFragment: BaseFragment<FragmentChoseLeagueBinding>(FragmentChos
                 is LeagueUIState.Error -> {
                     setError(state.errorId)
                 }
+
+                else -> {}
             }
         }
     }

@@ -13,12 +13,12 @@
             app:argType="integer"
             android:defaultValue="0" />
         <action
-            android:id="@+id/action_matchesFragment_to_webFragment"
-            app:destination="@id/webFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            android:id="@+id/action_matchesFragment_to_teamFragment"
+            app:destination="@id/teamFragment"
+            app:enterAnim="@anim/slide_from_right_border_animation"
+            app:exitAnim="@anim/wait_animation"
+            app:popEnterAnim="@anim/slide_from_left_border_animation"
+            app:popExitAnim="@anim/slide_to_right_border" />
     </fragment>
     <fragment
         android:id="@+id/choseCountryFragment"
@@ -27,10 +27,10 @@
         <action
             android:id="@+id/action_choseCountryFragment_to_choseLeagueFragment"
             app:destination="@id/choseLeagueFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            app:enterAnim="@anim/slide_from_right_border_animation"
+            app:exitAnim="@anim/wait_animation"
+            app:popEnterAnim="@anim/slide_from_left_border_animation"
+            app:popExitAnim="@anim/slide_to_right_border" />
     </fragment>
     <fragment
         android:id="@+id/choseLeagueFragment"
@@ -39,10 +39,10 @@
         <action
             android:id="@+id/action_choseLeagueFragment_to_matchesFragment"
             app:destination="@id/matchesFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            app:enterAnim="@anim/slide_from_right_border_animation"
+            app:exitAnim="@anim/wait_animation"
+            app:popEnterAnim="@anim/slide_from_left_border_animation"
+            app:popExitAnim="@anim/slide_to_right_border" />
         <argument
             android:name="country_id"
             app:argType="integer"
@@ -59,16 +59,25 @@
         <action
             android:id="@+id/action_greetingFragment_to_webFragment"
             app:destination="@id/webFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            app:enterAnim="@anim/slide_from_right_border_animation"
+            app:exitAnim="@anim/wait_animation"
+            app:popEnterAnim="@anim/slide_from_left_border_animation"
+            app:popExitAnim="@anim/slide_to_right_border" />
         <action
             android:id="@+id/action_greetingFragment_to_choseCountryFragment"
             app:destination="@id/choseCountryFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            app:enterAnim="@anim/slide_from_right_border_animation"
+            app:exitAnim="@anim/wait_animation"
+            app:popEnterAnim="@anim/slide_from_left_border_animation"
+            app:popExitAnim="@anim/slide_to_right_border" />
+    </fragment>
+    <fragment
+        android:id="@+id/teamFragment"
+        android:name="com.example.sportapplication.ui.fragment.TeamFragment"
+        android:label="TeamFragment">
+        <argument
+            android:name="team_id"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
 </navigation>

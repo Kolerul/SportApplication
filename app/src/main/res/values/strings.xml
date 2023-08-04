@@ -12,4 +12,9 @@
     <string name="welcome">Welcome!</string>
     <string name="matches">Matches</string>
     <string name="news">News</string>
+    <string name="coach">Coach:</string>
+    <string name="team_composition">Team composition</string>
+    <string name="age">Age: %s</string>
+    <string name="number">№: %s</string>
+    <string name="country">Country: %s</string>
 </resources>

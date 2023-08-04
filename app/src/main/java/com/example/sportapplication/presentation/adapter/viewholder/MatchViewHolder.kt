@@ -8,7 +8,7 @@ import com.example.sportapplication.domain.entity.Match
 
 class MatchViewHolder(private val binding: MatchItemBinding): RecyclerView.ViewHolder(binding.root) {
 
-    fun onBind(match: Match){
+    fun onBind(match: Match, onImageClickListener: (Int) -> Unit) {
         binding.apply {
             league.text = match.leagueName
             round.text = match.matchRound
@@ -20,13 +20,19 @@ class MatchViewHolder(private val binding: MatchItemBinding): RecyclerView.ViewH
             status.text = match.matchStatus.ifBlank { "Not started" }
             date.text = match.matchDate
             time.text = match.matchTime
-            homeTeamImage.load(match.teamHomeBadgeUri){
+            homeTeamImage.load(match.teamHomeBadgeUri) {
                 placeholder(R.drawable.loading_animation)
                 error(R.drawable.ic_no_image)
             }
-            awayTeamImage.load(match.teamAwayBadgeUri){
+            homeTeamImage.setOnClickListener {
+                onImageClickListener(match.matchHometeamId)
+            }
+            awayTeamImage.load(match.teamAwayBadgeUri) {
                 placeholder(R.drawable.loading_animation)
                 error(R.drawable.ic_no_image)
+            }
+            awayTeamImage.setOnClickListener {
+                onImageClickListener(match.matchAwayteamId)
             }
         }
     }

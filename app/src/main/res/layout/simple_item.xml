@@ -2,6 +2,8 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="10dp"
     xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
@@ -18,6 +20,7 @@
             android:layout_height="40dp"/>
 
         <TextView
+            android:textSize="15sp"
             android:id="@+id/name"
             tools:text="Manchester City"
             android:layout_margin="6dp"

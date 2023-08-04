@@ -6,13 +6,19 @@
         <item name="toolbarStyle">@style/ToolbarStyle</item>
         <item name="colorPrimary">@color/green</item>
         <item name="colorPrimaryVariant">@color/green</item>
+        <item name="android:textViewStyle">@style/BaseTextStyle</item>
     </style>
 
     <style name="Theme.SportApplication" parent="Base.Theme.SportApplication" />
 
     <style name="ToolbarStyle">
+        <item name="android:textSize">20sp</item>
         <item name="android:background">@color/green</item>
         <item name="titleTextColor">@color/white</item>
+    </style>
+
+    <style name="BaseTextStyle">
+        <item name="android:textColor">@color/black</item>
     </style>
 </resources>
 
